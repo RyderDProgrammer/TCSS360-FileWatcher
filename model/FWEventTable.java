@@ -38,12 +38,5 @@ public class FWEventTable extends JPanel {
                 theEvent.getExtension(),
                 theEvent.getEventTime()
         });
-
-        // Only insert event if database is connected
-        if (DatabaseConnection.getMyConnection() != null) {
-            FileEventDAO.insertFileEvent(theEvent);
-        } else {
-            System.out.println("Database is not connected. Event not stored.");
-        }
     }
 }

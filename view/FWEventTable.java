@@ -64,17 +64,6 @@ public class FWEventTable extends JPanel {
         int rowIndex = myTableModel.getRowCount() - 1;
         myTableModel.fireTableRowsInserted(rowIndex, rowIndex);
         
-        // Ensure database is connected before inserting event
-        if (DatabaseConnection.getMyConnection() == null) {
-            System.out.println("Database is not connected. Attempting to reconnect...");
-            if (!DatabaseConnection.connect()) {
-                System.out.println("Failed to reconnect to the database. Event not stored.");
-                return;
-            }
-        }
-        
-        // Insert event into database
-        FileEventDAO.insertFileEvent(theEvent);
     }
 
     /**
