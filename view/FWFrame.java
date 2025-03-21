@@ -40,7 +40,7 @@ public final class FWFrame extends JFrame {
         fileFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Set the icon for the frame.
-        final ImageIcon icon = new ImageIcon("files/appIcon.png");
+        final ImageIcon icon = new ImageIcon(getClass().getResource("/appIcon.png"));
         fileFrame.setIconImage(icon.getImage());
 
         fileFrame.setSize((int) (SCREEN_WIDTH * HORIZONTAL_SCALE), (int) (SCREEN_HEIGHT * VERTICAL_SCALE));
