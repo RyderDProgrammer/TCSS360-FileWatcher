@@ -158,10 +158,10 @@ public final class FWPanel extends JPanel {
      * Creates the buttons for the image icons.
      */
     private final void createButtonBar() {
-        ImageIcon startImageIcon = new ImageIcon("files/startWatching.png");
-        final ImageIcon stopImageIcon = new ImageIcon("files/stopWatching.png");
-        final ImageIcon dbImageIcon = new ImageIcon("files/startDB.png");
-        final ImageIcon clearImageIcon = new ImageIcon("files/clearData.png");
+        ImageIcon startImageIcon = new ImageIcon(getClass().getResource("/startWatching.png"));
+        final ImageIcon stopImageIcon = new ImageIcon(getClass().getResource("/stopWatching.png"));
+        final ImageIcon dbImageIcon = new ImageIcon(getClass().getResource("/startDB.png"));
+        final ImageIcon clearImageIcon = new ImageIcon(getClass().getResource("/clearData.png"));
 
         // Force fixing the scaling as for some reason it was larger than its siblings.
         startImageIcon = new ImageIcon(startImageIcon.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH));
