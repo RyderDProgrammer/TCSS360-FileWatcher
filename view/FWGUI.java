@@ -179,7 +179,7 @@ public final class FWGUI implements ActionListener {
         myImgDBButton = addButtonActionListener(myMainPanel.getMyImgDBButton());
         myImgDBButton.setToolTipText("Write to Database");
         myImgClearButton = addButtonActionListener(myMainPanel.getMyImgClearButton());
-        myImgClearButton.setToolTipText("Clear Table");
+        myImgClearButton.setToolTipText("Reset");
     }
 
     /**
@@ -215,7 +215,7 @@ public final class FWGUI implements ActionListener {
         myDatabaseConnectionLabel = new JLabel("Database not connected.");
         myMenuStart = new JMenuItem("Start");
         myMenuStop = new JMenuItem("Stop");
-        myFileQueryItem = new JMenuItem("Query Database(file extension)");
+        myFileQueryItem = new JMenuItem("Query Database");
         myFileQueryItem.setEnabled(false);
         myFileQueryItem.addActionListener(this);
         final JMenuItem closeItem = new JMenuItem("Close");
@@ -640,6 +640,7 @@ public final class FWGUI implements ActionListener {
         if (theConnectionValue) {
             success = DatabaseConnection.connect();
             if (success) {
+                myDatabaseActive = true;
                 myConnectDbItem.setEnabled(false);
                 myDisconnectDbItem.setEnabled(true);
                 setDatabaseConnected(true);
@@ -651,6 +652,7 @@ public final class FWGUI implements ActionListener {
                         "Database Connection Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
+            myDatabaseActive = false;
             myConnectDbItem.setEnabled(true);
             myDisconnectDbItem.setEnabled(false);
             DatabaseConnection.disconnect();
@@ -1049,15 +1051,18 @@ public final class FWGUI implements ActionListener {
      * Method to clear all the fields in the GUI and reset the buttons.
      */
     private final void clearFields() {
+        myEventTable.clearTable();
         myDirectoryField.setText("");
         myExtensionComboBox.setSelectedItem("All extensions");
         resetTimer();
         DatabaseConnection.disconnect();
+        if(myDatabaseActive){
+            handleDatabaseConnection(false);
+        }
         myDatabaseActive = false;
         if (myDirectoryWatchService != null)
             myDirectoryWatchService.stop();
         myIsMonitoring = false;
-        myEventTable.clearTable();
         checkFields();
     }
 
